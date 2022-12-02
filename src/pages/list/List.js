@@ -5,6 +5,7 @@ import Navbar from '../../Components/Navbar/Navbar'
 import Header from '../../Components/Header/Header'
 import './List.css'
 import { DateRange } from 'react-date-range'
+import SearchItem from '../../Components/SearchItem/SearchItem'
 
 function List() {
   const location = useLocation()
@@ -54,7 +55,7 @@ function List() {
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Children</span>
-                  <input type="number" min={0} className="lsOptionInput" placeholder={options.children} />                  
+                  <input type="number" min={0} className="lsOptionInput" placeholder={options.children} />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
@@ -62,10 +63,16 @@ function List() {
                 </div>
               </div>
             </div>
-              <button>Search</button>
+            <button>Search</button>
           </div>
           <div className="listResult">
-
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
           </div>
         </div>
       </div>
