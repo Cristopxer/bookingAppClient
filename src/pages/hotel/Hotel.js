@@ -60,7 +60,7 @@ function Hotel() {
             {photos.map((photo, idx) =>
             (
               <div className="hotelImgWrapper" key={idx}>
-                <img src={photo.src} className='hotelImg' onClick={() => { handleOpen(idx) }} />
+                <img src={photo.src} className='hotelImg' onClick={() => { handleOpen(idx) }} alt="" />
               </div>
             )
             )}
