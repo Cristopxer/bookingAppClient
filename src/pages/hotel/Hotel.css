@@ -85,7 +85,7 @@
     background-color: #ebf3ff;
     display: flex;
     padding: 20px;
-    flex-direction: column;
+    flex-direction: column;    
     gap: 20px;
 }
 
@@ -99,7 +99,13 @@
 }
 
 .hotelDetailsPrice>h2 {
-    font-weight: 300;
+    font-weight: 300;        
+}
+
+.hotelDetailsPriceTag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .hotelDetailsPrice>button {

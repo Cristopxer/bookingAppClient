@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../../Components/Navbar/Navbar'
 import Header from '../../Components/Header/Header'
 import MailList from '../../Components/MailList/MailList'
@@ -8,18 +8,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import useFetch from '../../Hooks/useFetch'
 import { useLocation } from 'react-router-dom'
+import { SearchContext } from '../../Context/SearchContext'
 
 
 function Hotel() {
 
   const location = useLocation()
   const id = location.pathname.split("/")[2]
-  console.log(id);
 
   const [sliderNumber, setSliderNumber] = useState(0)
   const [openSlider, setOpenSlider] = useState(false)
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`)
+
+  const { dates, options } = useContext(SearchContext)
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24
+  const dayDifference = (date1, date2) => {
+    const timeDiff = Math.abs((date2?.getTime() - date1?.getTime()))
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
+    return diffDays
+  }
+
+  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+
 
   const handleOpen = (idx) => {
     setSliderNumber(idx)
@@ -76,11 +88,14 @@ function Hotel() {
                 </p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a 9-night stay!</h1>
+                <h1>Perfect for {days}-{days > 1 ? "days" : "day"} stay!</h1>
                 <span>{data.title}</span>
-                <h2>
-                  <b>${data.cheapestPrice}</b> (per night)
-                </h2>
+                <div className="hotelDetailsPriceTag">
+                  <h2>
+                    <b>${days * data.cheapestPrice * options.room}</b>
+                  </h2>
+                  <p>(per {days}  {days > 1 ? "days" : "day"} - {options.room} {options.room > 1 ? "rooms" : "room"})</p>
+                </div>
                 <button>Reserve or Book Now!</button>
               </div>
             </div>
