@@ -30,7 +30,7 @@ function Hotel() {
     return diffDays
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+  const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate)
 
 
   const handleOpen = (idx) => {
@@ -88,13 +88,13 @@ function Hotel() {
                 </p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for {days}-{days > 1 ? "days" : "day"} stay!</h1>
+                <h1>Perfect for {days || ""} {days > 1 ? "days" : "day"} stay!</h1>
                 <span>{data.title}</span>
                 <div className="hotelDetailsPriceTag">
                   <h2>
-                    <b>${days * data.cheapestPrice * options.room}</b>
+                    <b>${(days * data.cheapestPrice * options.room) || ""}</b>
                   </h2>
-                  <p>(per {days}  {days > 1 ? "days" : "day"} - {options.room} {options.room > 1 ? "rooms" : "room"})</p>
+                  <p>(per {days || ""}  {days > 1 ? "days" : "day"} - {options.room || ""} {options.room > 1 ? "rooms" : "room"})</p>
                 </div>
                 <button>Reserve or Book Now!</button>
               </div>

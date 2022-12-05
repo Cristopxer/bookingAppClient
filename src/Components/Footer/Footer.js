@@ -46,7 +46,7 @@ function Footer() {
                     <li className="fListItem">Sustainability</li>
                 </ul>
             </div>
-            <div className="fText">Copyright ©2022 💙 Cristopher Ortiz</div>
+            <div className="fText">Developed 💙 by Cristopher Ortiz</div>
         </div>
     )
 }
