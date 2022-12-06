@@ -1,6 +1,7 @@
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useState } from 'react'
+import axios from 'axios'
 import { SearchContext } from '../../Context/SearchContext'
 import useFetch from '../../Hooks/useFetch'
 import "./Reservation.css"
@@ -34,34 +35,48 @@ function Reservation({ setOpen, hotelId }) {
         return list
     }
 
-    console.log(getDatesFromRange(dates[0]?.startDate, dates[0]?.endDate))
+    const allDates = getDatesFromRange(dates[0]?.startDate, dates[0]?.endDate)
+    const isAvailable = (roomNumber) => {
+        const isFound = roomNumber.unavailableDates.some(date => allDates.includes(new Date(date).getTime()))
+        return !isFound
+    }
 
-    const handleClick = () => {
+    const handleClick = async () => {
+        try {
+            await Promise.all(selectedRooms.map(roomId => {
+                const res = axios.put(`/rooms/availability/${roomId}`, { dates: allDates })
+                return res.data
+            }))
+        } catch (err) {
+
+        }
 
     }
     return (
         <div className="reservation">
             <div className="rContainer">
                 <FontAwesomeIcon icon={faCircleXmark} onClick={() => setOpen(false)} className="rClose" />
-            </div>
-            <span>Select your rooms:</span>
-            {data?.map((item, idx) =>
-            (<div className="rItem" key={idx}>
-                <div className="rItemInfo">
-                    <div className="rTitle">{item.title}</div>
-                    <div className="rDesc">{item.desc}</div>
-                    <div className="rMax">Max people: <b>{item.maxPeople}</b></div>
-                    <div className="rPrice">{item.price}</div>
-                </div>
-                {item.roomNumber?.map((room, idx) => (
-                    <div className="room" key={idx}>
-                        <label>{room.number}</label>
-                        <input type="checkbox" value={room._id} onChange={handleSelect} />
+                <span>Select your rooms:</span>
+                {data?.map((item, idx) =>
+                (<div className="rItem" key={idx}>
+                    <div className="rItemInfo">
+                        <div className="rTitle">{item.title}</div>
+                        <div className="rDesc">{item.desc}</div>
+                        <div className="rMax">Max people: <b>{item.maxPeople}</b></div>
+                        <div className="rPrice">{item.price}</div>
                     </div>
-                ))}
-            </div>)
-            )}
-            <button className="rButton" onClick={handleClick}>Reserve Now!</button>
+                    <div className="rSelectRooms">
+                        {item.roomNumber?.map((room, idx) => (
+                            <div className="room" key={idx}>
+                                <label>{room.number}</label>
+                                <input type="checkbox" value={room._id} onChange={handleSelect} disabled={!isAvailable(room)} />
+                            </div>
+                        ))}
+                    </div>
+                </div>)
+                )}
+                <button className="rButton" onClick={handleClick}>Reserve Now!</button>
+            </div>
         </div>
     )
 }
