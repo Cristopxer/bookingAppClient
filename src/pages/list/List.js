@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { format } from 'date-fns'
 import Navbar from '../../Components/Navbar/Navbar'
@@ -7,6 +7,7 @@ import useFetch from '../../Hooks/useFetch'
 import { DateRange } from 'react-date-range'
 import SearchItem from '../../Components/SearchItem/SearchItem'
 import './List.css'
+import { SearchContext } from '../../Context/SearchContext'
 
 function List() {
   const location = useLocation()
@@ -18,10 +19,12 @@ function List() {
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
 
-  const { data, loading, error, reFetch } = useFetch(`/hotels?city=${destination}&min=${min || 0}&max=${max || 9999}`)
+  const { data, loading, reFetch } = useFetch(`/hotels?city=${destination}&min=${min || 0}&max=${max || 9999}`)
+  const { dispatch } = useContext(SearchContext)
 
   const handleClick = () => {
     reFetch()
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
   }
 
 
@@ -69,7 +72,7 @@ function List() {
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
-                  <input type="number" min={1} className="lsOptionInput" placeholder={options.room} />
+                  <input type="number" min={1} className="lsOptionInput" placeholder={options.room} onChange={e => setOptions({ room: e.target.value })} />
                 </div>
               </div>
             </div>

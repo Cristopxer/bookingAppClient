@@ -7,8 +7,10 @@ import './Hotel.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import useFetch from '../../Hooks/useFetch'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../Context/SearchContext'
+import { AuthContext } from '../../Context/AuthContext'
+import Reservation from '../../Components/Reservation/Reservation'
 
 
 function Hotel() {
@@ -18,13 +20,18 @@ function Hotel() {
 
   const [sliderNumber, setSliderNumber] = useState(0)
   const [openSlider, setOpenSlider] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`)
 
   const { dates, options } = useContext(SearchContext)
 
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
+
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24
   const dayDifference = (date1, date2) => {
+    if (date1 === date2) return 1
     const timeDiff = Math.abs((date2?.getTime() - date1?.getTime()))
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
     return diffDays
@@ -48,6 +55,13 @@ function Hotel() {
     }
     setSliderNumber(newSlideNumber)
   }
+  const handleClick = () => {
+    if (user) {
+      setOpenModal(true)
+    } else {
+      navigate("/login")
+    }
+  }
   return (
     <div className="">
       <Navbar />
@@ -63,7 +77,7 @@ function Hotel() {
             <FontAwesomeIcon icon={faCircleArrowRight} className="arrowIcon" onClick={() => handleMove("r")} />
           </div>}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -88,15 +102,15 @@ function Hotel() {
                 </p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for {days || ""} {days > 1 ? "days" : "day"} stay!</h1>
+                <h1>Perfect for {days} {days > 1 ? "days" : "day"} stay!</h1>
                 <span>{data.title}</span>
                 <div className="hotelDetailsPriceTag">
                   <h2>
-                    <b>${(days * data.cheapestPrice * options.room) || ""}</b>
+                    <b>${(days * data.cheapestPrice * options.room)}</b>
                   </h2>
-                  <p>(per {days || ""}  {days > 1 ? "days" : "day"} - {options.room || ""} {options.room > 1 ? "rooms" : "room"})</p>
+                  <p>(per {days}  {days > 1 ? "days" : "day"} - {options.room} {options.room > 1 ? "rooms" : "room"})</p>
                 </div>
-                <button>Reserve or Book Now!</button>
+                <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
           </div>
@@ -104,6 +118,7 @@ function Hotel() {
           <Footer />
         </div>
       </>)}
+      {openModal && <Reservation setOpen={setOpenModal} hotelId={id} />}
     </div>
   )
 }
