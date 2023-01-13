@@ -1,5 +1,5 @@
 # Booking App
-Hey, here you will find and react web app for booking hotel rooms with advanced search and filter, it has its API built and a different site for content management with MongoDB, Express, React and Node.js (MERN Stack).
+Hey, here you will find a react web app for booking hotel rooms with advanced search and filter, it has its API built and a different site for content management with MongoDB, Express, React and Node.js (MERN Stack).
 
 ## Booking App backend
 The API to handle de backend of the booking app is built with Node.js, Express, and Mongoose to handle de request. It has a Models, Controllers, and Routes structure, it handles authentication with jsonwebtokennd, bcrypt for password encryption with custom middleware. 
