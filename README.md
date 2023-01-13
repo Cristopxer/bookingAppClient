@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Booking App
+Hey, here you will find and react web app for booking hotel rooms with advanced search and filter, it has its API built and a different site for content management with MongoDB, Express, React and Node.js (MERN Stack).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Booking App backend
+The API to handle de backend of the booking app is built with Node.js, Express, and Mongoose to handle de request. It has a Models, Controllers, and Routes structure, it handles authentication with jsonwebtokennd, bcrypt for password encryption with custom middleware. 
+You can see the project here: [Booking App backend](https://github.com/Cristopxer/bookingAppAPI)
 
-## Available Scripts
+## Booking App Content Management
+To handle CRUD operations used a template by Lamma Dev and modified as needs required to manage the users, hotels, and rooms content for the app this client is also connected to the API backend.
+You can see the project here: [Booking App Content Management](https://github.com/Cristopxer/bookingAppClient)
 
-In the project directory, you can run:
+## Techologies and Libraries
 
-### `npm start`
+### Data Storage
+* MongoDB
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend
+* Node.js
+* Express
+* mongoose
+* bcrypt
+* cookie-parser
+* cors
+* jsonwebtoken
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend
+* React
+* axios
+* react-data-range
+* react-router
+* fontawesome
 
-### `npm test`
+## Take a tour
+### Home
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![home](https://user-images.githubusercontent.com/49459233/212434546-13918eab-17ed-490f-8119-9e9e4a2e9331.png)
 
-### `npm run build`
+### Search and filtering
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![advance search](https://user-images.githubusercontent.com/49459233/212434618-3a4ea282-bb3e-41ca-94e0-ac3e314300bf.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![search results with advance search](https://user-images.githubusercontent.com/49459233/212434634-4be3d934-bc13-4150-81ba-0d626eef8e76.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Single Hotel view
 
-### `npm run eject`
+![single hotel view](https://user-images.githubusercontent.com/49459233/212434687-6b13639f-99cf-4bb4-a43d-0bb605aecdf1.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Login In - required for reservation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![loging for reservation](https://user-images.githubusercontent.com/49459233/212434703-0a1ed249-21d9-4512-8787-3f1d5eead689.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Reservation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![room reservation](https://user-images.githubusercontent.com/49459233/212434748-8718fdd5-d474-4d06-952e-4d917fdd0a70.png)
 
-## Learn More
+### Room availability
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![room availability](https://user-images.githubusercontent.com/49459233/212434810-8b60a37e-a39e-46b3-82e1-9057e84de2a8.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 
