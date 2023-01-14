@@ -26,6 +26,7 @@ You can see the project here: [Booking App Content Management](https://github.co
 ### Frontend
 * React
 * axios
+* context-API
 * react-data-range
 * react-router
 * fontawesome
