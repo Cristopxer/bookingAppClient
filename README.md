@@ -9,7 +9,7 @@ You can see the project and endpoint documentation here: [Booking App backend](h
 To handle CRUD operations used a template by Lamma Dev and modified as needs required to manage the users, hotels, and rooms content for the app this client is also connected to the API backend.
 You can see the project here: [Booking App Content Management](https://github.com/Cristopxer/bookingAppClient)
 
-## Techologies and Libraries
+## Technologies and Libraries
 
 ### Data Storage
 * MongoDB
